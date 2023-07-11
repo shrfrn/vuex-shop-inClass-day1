@@ -17,7 +17,7 @@ export default {
             this.$store.commit({ type: 'removeFromCart', productId })
         },
         checkout() {
-            console.log('Checkout!')
+            this.$store.commit({ type: 'checkout' })
          }
     },
     computed: {

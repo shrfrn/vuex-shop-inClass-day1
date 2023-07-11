@@ -1,0 +1,16 @@
+.add-product {
+    background-color: var(--clr1);
+    padding: 10px;
+    width: min(50vw, 360px);
+    margin: auto;
+}
+
+.add-product form {
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+}
+
+.add-product button {
+    justify-self: end;
+}

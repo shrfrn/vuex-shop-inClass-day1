@@ -1,0 +1,14 @@
+.product-preview {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: var(--clr1);
+}
+
+.product-preview > * {
+    margin-block: 3px;
+}
+
+.product-preview > button {
+    align-self: end;
+}

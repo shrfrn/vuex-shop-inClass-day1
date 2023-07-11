@@ -22,5 +22,13 @@ const storeOptions = {
             console.log(state.cart);
         },
     },
+    getters: {
+        cartTotal({ cart }) {
+            return cart.reduce((acc, prd) => acc += prd.price, 0)
+        },
+        productCount(state) {
+            return state.products?.length
+        }
+    }
 }
 export const store = createStore(storeOptions)

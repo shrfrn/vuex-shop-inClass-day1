@@ -34,7 +34,7 @@ export default {
             return this.$store.state.count
         },
         productCount() {
-            return this.$store.state.products?.length
+            return this.$store.getters.productCount
         },
         user() { return this.$store.state.user }
     }

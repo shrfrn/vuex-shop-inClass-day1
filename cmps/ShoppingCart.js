@@ -22,7 +22,7 @@ export default {
     },
     computed: {
         cartTotal() {
-            return 0
+            return this.$store.getters.cartTotal
         },
     }
 }

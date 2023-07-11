@@ -1,14 +1,15 @@
 const { createStore } = Vuex
 
 const storeOptions = {
+    strict: true,
     state() {
         return {
             count: 10,
         }
     },
     mutations: {
-        increment(state) {
-            state.count++
+        increment(state, { val }) {
+            state.count += val
         },
     },
 }

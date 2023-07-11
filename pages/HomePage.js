@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         inc(val) {
-           console.log('INC INC')
+           this.$store.commit({ type: 'increment', val })
         }
     },
     computed: {

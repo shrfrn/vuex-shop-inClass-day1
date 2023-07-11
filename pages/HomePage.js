@@ -8,7 +8,7 @@ export default {
             <h1>We have {{ productCount }} Products in our store!</h1>
             
             <section class="counter">
-                <h2>Count {{countForDisplay}}</h2>
+                <h2>Count {{ countForDisplay }}</h2>
                 <button @click="inc(1)">+</button>
                 <button @click="inc(10)">+10</button>
             </section>
@@ -17,12 +17,11 @@ export default {
     `,
     data() {
         return {
-            products: null,
         }
     },
     created() {
         productService.query()
-            .then(products => this.products = products)
+            .then(products => this.$store.commit({ type: 'setProducts', products }))
         showSuccessMsg('HomePage Loaded')
     },
     methods: {
@@ -35,7 +34,7 @@ export default {
             return this.$store.state.count
         },
         productCount() {
-            return 0
+            return this.$store.state.products?.length
         },
         user() { return this.$store.state.user }
     }

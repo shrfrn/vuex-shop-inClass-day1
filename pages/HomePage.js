@@ -18,7 +18,6 @@ export default {
     data() {
         return {
             products: null,
-            user: { username: 'Puki', balance: 20 },
         }
     },
     created() {
@@ -37,6 +36,7 @@ export default {
         },
         productCount() {
             return 0
-        }
+        },
+        user() { return this.$store.state.user }
     }
 }

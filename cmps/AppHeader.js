@@ -27,7 +27,6 @@ export default {
     data() {
         return {
             isCartShown : false,
-            user: { username: 'Baba', balance: 20 },
         }
     },
     computed : {
@@ -37,6 +36,7 @@ export default {
         cartProducts() {
             return []
         },
+        user() { return this.$store.state.user }
     },
     components: {
         ShoppingCart,

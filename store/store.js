@@ -4,6 +4,7 @@ const storeOptions = {
     strict: true,
     state() {
         return {
+            user: { username: 'Baba', balance: 20 },
             count: 10,
         }
     },

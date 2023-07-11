@@ -19,7 +19,10 @@ const storeOptions = {
         },
         addToCart(state, { product }) {
             state.cart.push(product)
-            console.log(state.cart);
+        },
+        removeFromCart({ cart }, { productId }) {
+            const idx = cart.findIndex(prd => prd._id === productId)
+            cart.splice(idx, 1)
         },
     },
     getters: {

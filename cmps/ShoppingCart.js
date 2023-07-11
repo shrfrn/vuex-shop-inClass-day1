@@ -3,7 +3,7 @@ export default {
     template: `
         <section class="shopping-cart">
             <ul>
-                <li v-for="product in products">
+                <li v-for="product in products" :key="product._id">
                     <button @click="removeFromCart(product._id)">x</button>
                     <h3>{{ product.name }}</h3>
                 </li>
@@ -14,7 +14,7 @@ export default {
     `,
     methods: {
         removeFromCart(productId) {
-            console.log('Remove from Cart:', productId)
+            this.$store.commit({ type: 'removeFromCart', productId })
         },
         checkout() {
             console.log('Checkout!')

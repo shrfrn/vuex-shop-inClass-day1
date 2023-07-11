@@ -33,7 +33,7 @@ export default {
     },
     computed: {
         countForDisplay() {
-            return 101
+            return this.$store.state.count
         },
         productCount() {
             return 0

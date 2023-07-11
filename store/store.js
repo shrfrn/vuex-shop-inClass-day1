@@ -24,6 +24,9 @@ const storeOptions = {
             const idx = cart.findIndex(prd => prd._id === productId)
             cart.splice(idx, 1)
         },
+        addProduct({ products }, { newProduct }){
+            products.push(newProduct)
+        }
     },
     getters: {
         cartTotal({ cart }) {

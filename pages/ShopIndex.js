@@ -16,20 +16,14 @@ export default {
             <Spinner />
         </section>
     `,
-    data() {
-        return {
-            products: null
-        }
-    },
-    created() {
-        productService.query()
-            .then(products => this.products = products)
-    },
     methods: {
         addToCart(product) {
             this.$store.commit({ type: 'addToCart', product })
             showSuccessMsg(`TODO: Add ${product._id} to Cart`)
         },
+    },
+    computed: {
+        products() { return this.$store.state.products }
     },
     components: {
         ProductList,

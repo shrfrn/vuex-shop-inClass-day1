@@ -19,11 +19,6 @@ export default {
         return {
         }
     },
-    created() {
-        productService.query()
-            .then(products => this.$store.commit({ type: 'setProducts', products }))
-        showSuccessMsg('HomePage Loaded')
-    },
     methods: {
         inc(val) {
            this.$store.commit({ type: 'increment', val })

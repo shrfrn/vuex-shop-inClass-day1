@@ -31,10 +31,10 @@ export default {
     },
     computed : {
         cartLength() {
-            return 0
+            return this.cartProducts.length
         },
         cartProducts() {
-            return []
+            return this.$store.state.cart
         },
         user() { return this.$store.state.user }
     },

@@ -7,6 +7,7 @@ const storeOptions = {
             user: { username: 'Baba', balance: 20 },
             count: 10,
             products: null,
+            cart: [],
         }
     },
     mutations: {
@@ -15,7 +16,11 @@ const storeOptions = {
         },
         setProducts(state, { products }) {
             state.products = products
-        }
+        },
+        addToCart(state, { product }) {
+            state.cart.push(product)
+            console.log(state.cart);
+        },
     },
 }
 export const store = createStore(storeOptions)

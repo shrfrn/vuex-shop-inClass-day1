@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         addToCart(product) {
-            console.log(`Adding ${product._id} to Cart`)
+            this.$store.commit({ type: 'addToCart', product })
             showSuccessMsg(`TODO: Add ${product._id} to Cart`)
         },
     },

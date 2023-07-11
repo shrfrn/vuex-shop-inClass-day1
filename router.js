@@ -2,6 +2,7 @@ const { createRouter, createWebHashHistory} = VueRouter
 
 import HomePage from './pages/HomePage.js'
 import ShopIndex from './pages/ShopIndex.js'
+import UserDetails from './pages/UserDetails.js'
 
 const routes = [
     {
@@ -11,6 +12,10 @@ const routes = [
     {
         path: '/shop',
         component: ShopIndex
+    },
+    {
+        path: '/user',
+        component: UserDetails
     },
 ]
 

@@ -1,10 +1,12 @@
+import { utilService } from "../services/util.service.js"
+
 const { createStore } = Vuex
 
 const storeOptions = {
     strict: true,
     state() {
         return {
-            user: { username: 'Baba', balance: 20 },
+            user: { username: 'Baba', balance: 20, orders: [] },
             count: 10,
             products: null,
             cart: [],
@@ -29,6 +31,14 @@ const storeOptions = {
         },
         checkout(state) {
             state.user.balance -= this.getters.cartTotal
+            const order = {
+                _id: utilService.makeId(),
+                createdAt: Date.now(),
+                items: state.cart,
+                total: this.getters.cartTotal,
+                status: 'Pending',
+            }
+            state.user.orders.unshift(order)
             state.cart = []
         }
     },

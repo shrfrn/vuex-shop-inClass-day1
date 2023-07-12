@@ -2,3 +2,21 @@
     list-style: none;
     padding: 0;
 }
+
+.add-funds {
+    position: fixed;
+    top: 80px;
+    right: max(10px, calc((100vw - var(--max-width)) / 2) + 10px);
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 10px;
+    background-color: var(--clr1);
+}
+
+.add-funds h3{
+    margin: 0;
+    margin-inline-end: 20px;
+}

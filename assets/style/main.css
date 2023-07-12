@@ -12,10 +12,11 @@
 
 :root {
     --clr1: rgb(143, 175, 188);
+    --max-width: 800px
 }
 
 body {
-    max-width: 800px;
+    max-width: var(--max-width);
     margin: auto;
     padding: 10px;
 

@@ -1,3 +1,4 @@
+import { showErrorMsg } from "../services/event-bus.service.js"
 import { utilService } from "../services/util.service.js"
 
 const { createStore } = Vuex
@@ -30,6 +31,10 @@ const storeOptions = {
             products.push(newProduct)
         },
         checkout(state) {
+            if(state.user.balance < this.getters.cartTotal){
+                showErrorMsg('Insufficient funds...')
+                return
+            }
             state.user.balance -= this.getters.cartTotal
             const order = {
                 _id: utilService.makeId(),
@@ -44,6 +49,9 @@ const storeOptions = {
         toggleOrderStatus(state, { orderId }) {
             const order = state.user.orders.find(order => order._id === orderId)
             order.status = order.status === 'Pending' ? 'Approved' : 'Pending'
+        },
+        addFunds({ user }, { amount }) {
+            user.balance += amount
         }
     },
     getters: {

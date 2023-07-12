@@ -2,6 +2,11 @@ export default {
     template: `
         <section class="user-details router-view">
             <h2>{{ user.username }} - Order History</h2>
+            <form @submit.prevent="addFunds" class="add-funds">
+                <h3>Add Juba</h3>
+                <input type="number" v-model.number="amount">
+                <button>Add</button>
+            </form>
             <ul v-if="user.orders.length">
                 <li v-for="order in user.orders">
                     <pre>{{ order }}</pre>
@@ -16,10 +21,19 @@ export default {
             </section>
         </section>
     `,
+    data() {
+        return {
+            amount: 0,
+        }
+    },
     methods: {
         toggleOrderStatus(orderId) {
             this.$store.commit({ type: 'toggleOrderStatus', orderId })
         },
+        addFunds() {
+            this.$store.commit({ type: 'addFunds', amount: this.amount })
+            this.amount = 0
+        }
     },
     computed: {
         user() {

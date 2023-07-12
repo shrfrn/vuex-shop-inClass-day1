@@ -11,6 +11,7 @@ export const userService = {
     signup,
     addFunds,
     addOrder,
+    toggleOrderStatus,
 }
 
 // Demo Data:
@@ -57,9 +58,9 @@ function addFunds(amount) {
     user.balance += amount
 
     return storageService.put(USER_KEY, user)
-        .then(savedUser => {
-            _saveUserToStorage(savedUser)
-            return savedUser.balance
+        .then(updatedUser => {
+            _saveUserToStorage(updatedUser)
+            return updatedUser.balance
         })
 }
 
@@ -77,9 +78,22 @@ function addOrder(cart, total) {
     user.orders.unshift(order)
 
     return storageService.put(USER_KEY, user)
-        .then(savedUser => {
-            _saveUserToStorage(savedUser)
-            return savedUser
+        .then(updatedUser => {
+            _saveUserToStorage(updatedUser)
+            return updatedUser
+        })
+}
+
+function toggleOrderStatus(orderId) {
+    const user = getLoggedinUser()
+
+    const order = user.orders.find(order => order._id === orderId)
+    order.status = order.status === 'Pending' ? 'Approved' : 'Pending'
+
+    return storageService.put(USER_KEY, user)
+        .then(updatedUser => {
+            _saveUserToStorage(updatedUser)
+            return order
         })
 }
 

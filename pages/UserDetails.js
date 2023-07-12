@@ -30,7 +30,10 @@ export default {
     },
     methods: {
         toggleOrderStatus(orderId) {
-            this.$store.commit({ type: 'toggleOrderStatus', orderId })
+            userService.toggleOrderStatus(orderId)
+                .then(order => {
+                    this.$store.commit({ type: 'toggleOrderStatus', orderId: order._id })
+                })
         },
         addFunds() {
             userService.addFunds(this.amount)

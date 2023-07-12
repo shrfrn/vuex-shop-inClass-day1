@@ -1,3 +1,6 @@
+import { showErrorMsg } from "../services/event-bus.service.js"
+import { userService } from "../services/user.service.js"
+
 export default {
     props:['products'],
     template: `
@@ -17,10 +20,23 @@ export default {
             this.$store.commit({ type: 'removeFromCart', productId })
         },
         checkout() {
-            this.$store.commit({ type: 'checkout' })
+            if(this.user.balance < this.cartTotal){
+                showErrorMsg('Insufficient funds...')
+                return
+            }
+            userService.addOrder(this.cart, this.cartTotal)
+                .then(updatedUser => {
+                    this.$store.commit({ type: 'checkout', updatedUser })
+                })
          }
     },
     computed: {
+        user() {
+            return this.$store.getters.user
+        },
+        cart() {
+            return this.$store.getters.cart
+        },
         cartTotal() {
             return this.$store.getters.cartTotal
         },

@@ -10,6 +10,7 @@ export const userService = {
     logout,
     signup,
     addFunds,
+    addOrder,
 }
 
 // Demo Data:
@@ -61,6 +62,27 @@ function addFunds(amount) {
             return savedUser.balance
         })
 }
+
+function addOrder(cart, total) {
+    const user = getLoggedinUser()
+
+    const order = {
+        _id: utilService.makeId(),
+        createdAt: Date.now(),
+        items: cart,
+        total,
+        status: 'Pending',
+    }
+    user.balance -= total
+    user.orders.unshift(order)
+
+    return storageService.put(USER_KEY, user)
+        .then(savedUser => {
+            _saveUserToStorage(savedUser)
+            return savedUser
+        })
+}
+
 function _saveUserToStorage(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user

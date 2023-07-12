@@ -1,4 +1,3 @@
-import { showErrorMsg } from "../services/event-bus.service.js"
 import { userService } from "../services/user.service.js"
 import { utilService } from "../services/util.service.js"
 
@@ -31,20 +30,8 @@ const storeOptions = {
         addProduct({ products }, { newProduct }){
             products.push(newProduct)
         },
-        checkout(state) {
-            if(state.user.balance < this.getters.cartTotal){
-                showErrorMsg('Insufficient funds...')
-                return
-            }
-            state.user.balance -= this.getters.cartTotal
-            const order = {
-                _id: utilService.makeId(),
-                createdAt: Date.now(),
-                items: state.cart,
-                total: this.getters.cartTotal,
-                status: 'Pending',
-            }
-            state.user.orders.unshift(order)
+        checkout(state, { updatedUser }) {
+            state.user = updatedUser
             state.cart = []
         },
         toggleOrderStatus(state, { orderId }) {
@@ -56,6 +43,12 @@ const storeOptions = {
         }
     },
     getters: {
+        user({ user }) {
+            return user
+        },
+        cartTotal({ cart }) {
+            return cart
+        },
         cartTotal({ cart }) {
             return cart.reduce((acc, prd) => acc += prd.price, 0)
         },

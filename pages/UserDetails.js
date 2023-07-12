@@ -1,3 +1,5 @@
+import { userService } from "../services/user.service.js"
+
 export default {
     template: `
         <section class="user-details router-view">
@@ -31,8 +33,11 @@ export default {
             this.$store.commit({ type: 'toggleOrderStatus', orderId })
         },
         addFunds() {
-            this.$store.commit({ type: 'addFunds', amount: this.amount })
-            this.amount = 0
+            userService.addFunds(this.amount)
+                .then(newBalance => {
+                    this.$store.commit({ type: 'addFunds', newBalance })
+                    this.amount = 0
+                })
         }
     },
     computed: {

@@ -51,8 +51,8 @@ const storeOptions = {
             const order = state.user.orders.find(order => order._id === orderId)
             order.status = order.status === 'Pending' ? 'Approved' : 'Pending'
         },
-        addFunds({ user }, { amount }) {
-            user.balance += amount
+        addFunds({ user }, { newBalance }) {
+            user.balance = newBalance
         }
     },
     getters: {

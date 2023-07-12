@@ -9,6 +9,7 @@ export const userService = {
     login,
     logout,
     signup,
+    addFunds,
 }
 
 // Demo Data:
@@ -50,6 +51,16 @@ function signup(credentials) {
         })
 }
 
+function addFunds(amount) {
+    const user = getLoggedinUser()
+    user.balance += amount
+
+    return storageService.put(USER_KEY, user)
+        .then(savedUser => {
+            _saveUserToStorage(savedUser)
+            return savedUser.balance
+        })
+}
 function _saveUserToStorage(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user

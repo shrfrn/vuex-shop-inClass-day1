@@ -9,21 +9,17 @@ export const userService = {
     login,
     logout,
     signup,
-    get,
-    updateBalance,
-    addOrder,
-    changeOrderStatus
 }
 
 // Demo Data:
-// signup({fullname: 'Baba Ji', username: 'baba', password: '123'})
-login({username: 'baba', password: '123'})
+// signup({ fullname: 'Baba Ji', username: 'baba', password: '123' })
+
+login({ username: 'baba', password: '123' })
 
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || null)
 }
-
 
 function login(credentials) {
     return storageService.query(USER_KEY)
@@ -54,53 +50,7 @@ function signup(credentials) {
         })
 }
 
-function get(userId) {
-    return storageService.get(USER_KEY, userId)
-}
-
-function updateBalance(amount) {
-    const user = getLoggedinUser()
-    user.balance += amount
-    return storageService.put(USER_KEY, user).then(savedUser => {
-        _saveUserToStorage(savedUser)
-        return savedUser.balance
-    })
-}
-
 function _saveUserToStorage(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
-
-function addOrder(cart, total) {
-    const user = getLoggedinUser()
-
-    const order = {
-        _id: utilService.makeId(),
-        createdAt: Date.now(),
-        items: cart,
-        total,
-        status: 'PENDING',
-    }   
-    user.balance -= total 
-    user.orders.unshift(order)
-
-    return storageService.put(USER_KEY, user).then(savedUser => {
-        _saveUserToStorage(savedUser)
-        return savedUser
-    })
-}
-
-function changeOrderStatus(orderId, status) {
-    const user = getLoggedinUser()
-    const order = user.orders.find(order => order._id === orderId)
-    order.status = status
-    
-    return storageService.put(USER_KEY, user).then(savedUser => {
-        _saveUserToStorage(savedUser)
-        return order
-    })
-}
-
-
-

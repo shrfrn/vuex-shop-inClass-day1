@@ -1,4 +1,5 @@
 import { showErrorMsg } from "../services/event-bus.service.js"
+import { userService } from "../services/user.service.js"
 import { utilService } from "../services/util.service.js"
 
 const { createStore } = Vuex
@@ -7,7 +8,7 @@ const storeOptions = {
     strict: true,
     state() {
         return {
-            user: { username: 'Baba', balance: 20, orders: [] },
+            user: userService.getLoggedinUser(),
             count: 10,
             products: null,
             cart: [],

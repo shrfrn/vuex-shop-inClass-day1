@@ -4,6 +4,7 @@
 @import './cmps/ProductPreview.css';
 @import './cmps/AddProduct.css';
 @import './cmps/ShoppingCart.css';
+@import './cmps/UserDetails.css';
 
 * {
     box-sizing: border-box;

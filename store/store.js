@@ -40,6 +40,10 @@ const storeOptions = {
             }
             state.user.orders.unshift(order)
             state.cart = []
+        },
+        toggleOrderStatus(state, { orderId }) {
+            const order = state.user.orders.find(order => order._id === orderId)
+            order.status = order.status === 'Pending' ? 'Approved' : 'Pending'
         }
     },
     getters: {

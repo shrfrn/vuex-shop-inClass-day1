@@ -11,8 +11,15 @@ export default {
             </form>
             <ul v-if="user.orders.length">
                 <li v-for="order in user.orders">
-                    <pre>{{ order }}</pre>
-                    <button @click="toggleOrderStatus(order._id)">{{ action(order.status) }}</button>
+                    <details>
+                        <summary class="order-summary">
+                            <span>{{ order.items?.length || 0 }} Items</span> - 
+                            <span>\${{ order.total }} Total</span> - 
+                            <span>{{ order.status }}</span> 
+                        </summary>
+                        <pre>{{ order }}</pre>
+                        <button @click="toggleOrderStatus(order._id)">{{ action(order.status) }}</button>
+                    </details>
                 </li>
             </ul>
             <section v-else class="no-orders-yet">

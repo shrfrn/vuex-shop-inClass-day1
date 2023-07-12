@@ -20,3 +20,8 @@
     margin: 0;
     margin-inline-end: 20px;
 }
+
+.order-summary {
+    font-size: 1.3em;
+    margin-block-end: .5em;
+}
